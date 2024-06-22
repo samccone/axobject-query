@@ -3,6 +3,10 @@
   "version": "4.0.0",
   "description": "Programmatic access to information about the AXObject Model",
   "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./package.json": "./package.json"
+  },
   "files": [
     "lib"
   ],
