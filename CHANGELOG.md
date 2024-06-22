@@ -100,6 +100,12 @@ Commit 22915be contains a substantial audit and update of the project to match t
 
   - f250e99 Update package-lock.json
 
+## 3.2.2
+
+This release restores backwards compatibility that was broken in v3.2.0.
+
+  - 3a89d8c [Deps] switch from dequal to deep-equal-json
+
 ## 4.0.0
 
   - b9b3e54 Remove the attribute information from the DisclosureTriangle concept
