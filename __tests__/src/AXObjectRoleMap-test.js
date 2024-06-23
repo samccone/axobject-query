@@ -230,7 +230,7 @@ test('AXObjectRoleMap', async (t) => {
       }
 
       [...AXObjectRoleMap.keys()].forEach(([key]) => {
-          s2t.ok(entriesKeys.find(([k]) => k === key), `spread has key: ${key}`);
+        s2t.ok(entriesKeys.find(([k]) => k === key), `spread has key: ${key}`);
       });
     });
 
@@ -241,14 +241,14 @@ test('AXObjectRoleMap', async (t) => {
       for (const values of AXObjectRoleMap.values()) {
         s2t.ok(
           entriesValues.some((vs) => deepEqual(values, vs)),
-          `for-of has values: ${inspect(values)}`
+          `for-of has values: ${inspect(values)}`,
         );
       }
 
       [...AXObjectRoleMap.values()].forEach((values) => {
         s2t.ok(
           entriesValues.some((vs) => deepEqual(values, vs)),
-          `spread has values: ${inspect(values)}`
+          `spread has values: ${inspect(values)}`,
         );
       });
     });

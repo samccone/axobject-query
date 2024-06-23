@@ -81,7 +81,7 @@ const entriesList = [
 ];
 
 test('elementAXObjectMap', async (t) => {
-    t.test('iteration', (st) => {
+  t.test('iteration', (st) => {
 
     st.notEqual(elementAXObjectMap[Symbol.iterator], undefined, 'has an iterator defined');
     st.equal([...elementAXObjectMap].length, 70, 'has a specific length');
@@ -243,7 +243,7 @@ test('elementAXObjectMap', async (t) => {
       }
 
       [...elementAXObjectMap.keys()].forEach((key) => {
-          s2t.ok(entriesKeys.find((k) => deepEqual(k, key)), `spread has key: ${inspect(key)}`);
+        s2t.ok(entriesKeys.find((k) => deepEqual(k, key)), `spread has key: ${inspect(key)}`);
       });
     });
 
@@ -254,14 +254,14 @@ test('elementAXObjectMap', async (t) => {
       for (const values of elementAXObjectMap.values()) {
         s2t.ok(
           entriesValues.some((vs) => deepEqual(values, vs)),
-          `for-of has values: ${inspect(values)}`
+          `for-of has values: ${inspect(values)}`,
         );
       }
 
       [...elementAXObjectMap.values()].forEach((values) => {
         s2t.ok(
           entriesValues.some((vs) => deepEqual(values, vs)),
-          `spread has values: ${inspect(values)}`
+          `spread has values: ${inspect(values)}`,
         );
       });
     });

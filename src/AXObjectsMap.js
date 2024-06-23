@@ -255,7 +255,7 @@ const AXObjects: TAXObjects = [
   ['UserInterfaceTooltipRole', UserInterfaceTooltipRole],
   ['VideoRole', VideoRole],
   ['WebAreaRole', WebAreaRole],
-  ['WindowRole', WindowRole]
+  ['WindowRole', WindowRole],
 ];
 
 const AXObjectsMap: TAXObjectQueryMap<
@@ -263,10 +263,10 @@ const AXObjectsMap: TAXObjectQueryMap<
   AXObjectName,
   AXObjectModelDefinition,
 > = {
-  entries: function (): TAXObjects {
+  entries(): TAXObjects {
     return AXObjects;
   },
-  forEach: function (
+  forEach(
     fn: (AXObjectModelDefinition, AXObjectName, TAXObjects) => void,
     thisArg: any = null,
   ): void {
@@ -274,19 +274,19 @@ const AXObjectsMap: TAXObjectQueryMap<
       fn.call(thisArg, values, key, AXObjects);
     }
   },
-  get: function (key: AXObjectName): ?AXObjectModelDefinition {
+  get(key: AXObjectName): ?AXObjectModelDefinition {
     const item = AXObjects.find(tuple => (tuple[0] === key) ? true : false);
     return item && item[1];
   },
-  has: function (key: AXObjectName): boolean {
+  has(key: AXObjectName): boolean {
     return !!AXObjectsMap.get(key);
   },
-  keys: function (): Array<AXObjectName> {
+  keys(): Array<AXObjectName> {
     return AXObjects.map(([key]) => key);
   },
-  values: function (): Array<AXObjectModelDefinition> {
+  values(): Array<AXObjectModelDefinition> {
     return AXObjects.map(([, values]) => values);
-  }
+  },
 };
 
 export default (

@@ -46,7 +46,7 @@ function stringifyArray(arr, depth) {
         if (value != null) {
           tmp.push(`${constructIndent(depth)}${triageValue(value, (depth))},`);
         }
-      }
+      },
     );
     output.push(tmp.join('\n'));
     output.push(`${constructIndent(depth - 1)}]`);
@@ -78,26 +78,26 @@ function constructIndent(depth) {
 function triageValue(value, depth = 0) {
   let output = [];
   switch(getTypeof(value)) {
-    case 'object':
-      output = output.concat(stringifyObject(value, (depth + 1)));
-      break;
-    case 'array':
-      output = output.concat(stringifyArray(value, (depth + 1)));
-      break;
-    case 'boolean':
-      output = output.concat(stringifyBoolean(value, (depth + 1)));
-      break;
-    case 'string':
-      output = output.concat(`'${value}'`);
-      break;
-    default:
-      output.push('null');
+  case 'object':
+    output = output.concat(stringifyObject(value, (depth + 1)));
+    break;
+  case 'array':
+    output = output.concat(stringifyArray(value, (depth + 1)));
+    break;
+  case 'boolean':
+    output = output.concat(stringifyBoolean(value, (depth + 1)));
+    break;
+  case 'string':
+    output = output.concat(`'${value}'`);
+    break;
+  default:
+    output.push('null');
   }
   return output;
 }
 
 fs.readFile(path.join('scripts/axmodel.json'), {
-  encoding: 'utf8'
+  encoding: 'utf8',
 }, (error, data) => {
   if (error) {
     console.error(error);
@@ -123,7 +123,8 @@ fs.readFile(path.join('scripts/axmodel.json'), {
           }).join('\n'),
         '};',
         '',
-        `export default ${camelName};`,
+        `export default ${camelName};
+`,
       ];
 
       fs.mkdir(path.join(baseDir), function () {
@@ -131,14 +132,14 @@ fs.readFile(path.join('scripts/axmodel.json'), {
           path.join(baseDir, `${camelName}.js`),
           file.join('\n'),
           {
-            encoding: 'utf8'
+            encoding: 'utf8',
           },
           function (err) {
             if (err) throw err;
             console.log(`Created file ${baseDir}/${camelName}.js`);
           });
       });
-  });
+    });
 });
 
 function requiresMapper (roles, depth) {
@@ -150,11 +151,11 @@ function requiresMapper (roles, depth) {
 function requiresCombiner(roles, depth) {
   return roles.map(role => {
     return `${constructIndent(depth)}['${role[0]}', ${role[1]}]`;
-  }).join(',\n');
+  }).join(',\n') + ',';
 }
 
 fs.readFile(path.join('scripts/axmodel.json'), {
-  encoding: 'utf8'
+  encoding: 'utf8',
 }, (error, data) => {
   if (error) {
     console.error(error);
@@ -170,10 +171,10 @@ fs.readFile(path.join('scripts/axmodel.json'), {
       literalRequires.push([name, camelName]);
     });
 
-    // Create a rollup maps.
-    fs.writeFile(
-      path.join('src', `AXObjectsMap.js`),
-      '/**\n'
+  // Create a rollup maps.
+  fs.writeFile(
+    path.join('src', `AXObjectsMap.js`),
+    '/**\n'
       + ' * @flow\n'
       + ' */\n'
       + '\n'
@@ -192,10 +193,10 @@ fs.readFile(path.join('scripts/axmodel.json'), {
       + '  AXObjectName,\n'
       + '  AXObjectModelDefinition,\n'
       + '> = {\n'
-      + '  entries: function (): TAXObjects {\n'
+      + '  entries(): TAXObjects {\n'
       + '    return AXObjects;\n'
       + '  },\n'
-      + '  forEach: function (\n'
+      + '  forEach(\n'
       + '    fn: (AXObjectModelDefinition, AXObjectName, TAXObjects) => void,\n'
       + '    thisArg: any = null,\n'
       + '  ): void {\n'
@@ -203,19 +204,19 @@ fs.readFile(path.join('scripts/axmodel.json'), {
       + '      fn.call(thisArg, values, key, AXObjects);\n'
       + '    }\n'
       + '  },\n'
-      + '  get: function (key: AXObjectName): ?AXObjectModelDefinition {\n'
+      + '  get(key: AXObjectName): ?AXObjectModelDefinition {\n'
       + '    const item = AXObjects.find(tuple => (tuple[0] === key) ? true : false);\n'
       + '    return item && item[1];\n'
       + '  },\n'
-      + '  has: function (key: AXObjectName): boolean {\n'
+      + '  has(key: AXObjectName): boolean {\n'
       + '    return !!AXObjectsMap.get(key);\n'
       + '  },\n'
-      + '  keys: function (): Array<AXObjectName> {\n'
+      + '  keys(): Array<AXObjectName> {\n'
       + '    return AXObjects.map(([key]) => key);\n'
       + '  },\n'
-      + '  values: function (): Array<AXObjectModelDefinition> {\n'
+      + '  values(): Array<AXObjectModelDefinition> {\n'
       + '    return AXObjects.map(([, values]) => values);\n'
-      + '  }\n'
+      + '  },\n'
       + '};\n'
       + '\n'
       + 'export default (\n'
@@ -224,12 +225,12 @@ fs.readFile(path.join('scripts/axmodel.json'), {
       + '    AXObjectsMap.entries(),\n'
       + '  ): TAXObjectQueryMap<TAXObjects, AXObjectName, AXObjectModelDefinition>\n'
       + ');\n',
-      {
-        encoding: 'ascii'
-      },
-      function (err) {
-        if (err) throw err;
-        console.log(`Created file ./src/AXObjectsMap.js`);
-      }
-    );
+    {
+      encoding: 'ascii',
+    },
+    function (err) {
+      if (err) throw err;
+      console.log(`Created file ./src/AXObjectsMap.js`);
+    },
+  );
 });

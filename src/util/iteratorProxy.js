@@ -10,7 +10,7 @@ function iteratorProxy<T>(this: Array<*>): Iterator<T> {
     '@@iterator': function (): $Iterator<*, *, *> {
       return iter;
     },
-    next: function (): IteratorResult<*, *> {
+    next(): IteratorResult<*, *> {
       if (index < values.length) {
         let value = values[index];
         index = index + 1;

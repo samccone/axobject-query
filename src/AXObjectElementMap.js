@@ -36,10 +36,10 @@ const AXObjectElementMap: TAXObjectQueryMap<
   AXObjectName,
   Array<AXObjectModelRelationConcept>,
 > = {
-  entries: function (): TAXObjectElements {
+  entries(): TAXObjectElements {
     return AXObjectElements;
   },
-  forEach: function (
+  forEach(
     fn: (Array<AXObjectModelRelationConcept>, AXObjectName, TAXObjectElements) => void,
     thisArg: any = null,
   ): void {
@@ -47,17 +47,17 @@ const AXObjectElementMap: TAXObjectQueryMap<
       fn.call(thisArg, values, key, AXObjectElements);
     }
   },
-  get: function (key: AXObjectName): ?Array<AXObjectModelRelationConcept> {
+  get(key: AXObjectName): ?Array<AXObjectModelRelationConcept> {
     const item = AXObjectElements.find(tuple => (tuple[0] === key) ? true : false);
     return item && item[1];
   },
-  has: function (key: AXObjectName): boolean {
+  has(key: AXObjectName): boolean {
     return !!AXObjectElementMap.get(key);
   },
-  keys: function (): Array<AXObjectName> {
+  keys(): Array<AXObjectName> {
     return AXObjectElements.map(([key]) => key);
   },
-  values: function (): Array<Array<AXObjectModelRelationConcept>> {
+  values(): Array<Array<AXObjectModelRelationConcept>> {
     return AXObjectElements.map(([, values]) => values);
   },
 };

@@ -36,10 +36,10 @@ const AXObjectRoleMap: TAXObjectQueryMap<
   AXObjectName,
   Array<AXObjectModelRelationConcept>
 > = {
-  entries: function (): TAXObjectRoleElements {
+  entries(): TAXObjectRoleElements {
     return AXObjectRoleElements;
   },
-  forEach: function (
+  forEach(
     fn: (Array<AXObjectModelRelationConcept>, AXObjectName, TAXObjectRoleElements) => void,
     thisArg: any = null,
   ): void {
@@ -47,19 +47,19 @@ const AXObjectRoleMap: TAXObjectQueryMap<
       fn.call(thisArg, values, key, AXObjectRoleElements);
     }
   },
-  get: function (key: AXObjectName): ?Array<AXObjectModelRelationConcept> {
+  get(key: AXObjectName): ?Array<AXObjectModelRelationConcept> {
     const item = AXObjectRoleElements.find(tuple => (tuple[0] === key) ? true : false);
     return item && item[1];
   },
-  has: function (key: AXObjectName): boolean {
+  has(key: AXObjectName): boolean {
     return !!AXObjectRoleMap.get(key);
   },
-  keys: function (): Array<AXObjectName> {
+  keys(): Array<AXObjectName> {
     return AXObjectRoleElements.map(([key]) => key);
   },
-  values: function (): Array<Array<AXObjectModelRelationConcept>> {
+  values(): Array<Array<AXObjectModelRelationConcept>> {
     return AXObjectRoleElements.map(([, values]) => values);
-  }
+  },
 };
 
 export default (

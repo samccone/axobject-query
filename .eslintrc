@@ -1,15 +1,21 @@
 {
   "extends": [
-    "eslint:recommended",
+    "@ljharb/eslint-config/esm",
     "plugin:flowtype/recommended"
   ],
-  "env": {
-    "es6": true
-  },
   "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "sourceType": "module",
+  },
+  "env": {
+    "es6": true,
+  },
   "plugins": [
     "flowtype"
   ],
+  "rules": {
+    "indent": [2, 2],
+  },
   "overrides": [
     {
       "files": [
@@ -24,11 +30,11 @@
         "__tests__/**/*.js"
       ],
       "extends": [
-        "eslint:recommended",
+        "@ljharb/eslint-config/tests",
       ],
       "env": {
-        "node": true
-      }
+        "node": true,
+      },
     }
   ]
 }

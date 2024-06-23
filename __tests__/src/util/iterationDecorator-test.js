@@ -6,15 +6,15 @@ import iterationDecorator from 'axobject-query/src/util/iterationDecorator';
 
 test('iterationDecorator', (t) => {
   t.test('adds a Symbol.iterator property to a collection', async (st) => {
-      // const collection = {a: 'apple', b: 'banana', c: 'cantaloupe'};
-      const collection = {
-        'a': 'apple',
-        'b': 'banana',
-        'c': 'cantaloupe',
-      };
-      const arr = ['apple', 'banana', 'cantaloupe'];
-      const iter = iterationDecorator(collection, values(collection));
-      st.deepEqual([...iter], arr, 'returns the values when iterated');
+    // const collection = {a: 'apple', b: 'banana', c: 'cantaloupe'};
+    const collection = {
+      'a': 'apple',
+      'b': 'banana',
+      'c': 'cantaloupe',
+    };
+    const arr = ['apple', 'banana', 'cantaloupe'];
+    const iter = iterationDecorator(collection, values(collection));
+    st.deepEqual([...iter], arr, 'returns the values when iterated');
   });
 
   t.test('when Symbol is not defined in the global space', async (st) => {
@@ -32,7 +32,7 @@ test('iterationDecorator', (t) => {
 
   t.test('when Symbol.iterator is not defined in the global space', async (st) => {
     const originalSymbolIterator = typeof Symbol === 'function' ? Symbol.iterator : null;
-    st.teardown(mockProperty(global, 'Symbol', { value: function () {} }));
+    st.teardown(mockProperty(global, 'Symbol', { value () {} }));
 
     const collection = {
       'a': 'apple',
